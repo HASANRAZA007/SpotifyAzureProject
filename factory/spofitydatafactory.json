@@ -1,0 +1,9 @@
+{
+	"name": "spofitydatafactory",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "b05d307f-6846-4510-a4bb-d9666f5932f8",
+		"tenantId": "9b9ce162-e01f-4d80-8f82-594ba0cb7460"
+	}
+}
