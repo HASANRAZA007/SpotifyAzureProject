@@ -43,7 +43,7 @@
 								"source": {
 									"type": "AzureSqlSource",
 									"sqlReaderQuery": {
-										"value": "SELECT *\nFROM @{item().schema}.@{item().table}\nWHERE CAST(@{item().cdc_column} AS DATETIME2) >\nCAST(\n    @{if(\n        empty(item().from_date),\n        activity('Last_CDC').output.value[0].cdc,\n        item().from_date\n    )} AS DATETIME2\n)\n",
+										"value": "SELECT * FROM @{item().schema}.@{item().table} WHERE @{item().cdc_column} > @{if( empty(item().from_date), activity('Last_CDC').output.value[0].cdc, item().from_date )}",
 										"type": "Expression"
 									},
 									"queryTimeout": "02:00:00",
@@ -317,6 +317,29 @@
 							}
 						}
 					]
+				}
+			},
+			{
+				"name": "Alerts",
+				"type": "WebActivity",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"url": "https://prod-30.northcentralus.logic.azure.com:443/workflows/dfe8bd2745a24d598c3b7ef646010ce8/triggers/When_an_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_an_HTTP_request_is_received%2Frun&sv=1.0&sig=GzIp65dft9ijW--k32oZUJUvLJsIDAglHpkG3cfi1I0",
+					"body": {
+						"value": "{\n    \"pipeline_run_id\":\"@{pipeline().Pipeline}\",\n    \"pipeline_run_id\":\"@{pipeline().RunId}\"\n}",
+						"type": "Expression"
+					}
 				}
 			}
 		],
