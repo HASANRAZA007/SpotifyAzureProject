@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "spofitydatafactory"
+		},
+		"AzureSql_ls_password": {
+			"value": ""
+		},
+		"AzureStorage_ls_accountKey": {
+			"value": ""
+		},
+		"AzureSql_ls_properties_typeProperties_server": {
+			"value": "spotifyhs.database.windows.net"
+		},
+		"AzureSql_ls_properties_typeProperties_database": {
+			"value": "spotifydb"
+		},
+		"AzureSql_ls_properties_typeProperties_userName": {
+			"value": "hasansql"
+		},
+		"AzureStorage_ls_properties_typeProperties_url": {
+			"value": "https://spotifydatalakegen2.dfs.core.windows.net/"
+		}
+	}
+}
